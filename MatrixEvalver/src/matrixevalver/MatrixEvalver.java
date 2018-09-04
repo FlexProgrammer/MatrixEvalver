@@ -30,7 +30,7 @@ public class MatrixEvalver {
         while(true){
             try{
                 Scanner sc = new Scanner(System.in);
-                String[] str = {"першу", "другу", "третю", "четверту"};
+                String[] str = {"першу", "другу", "третю", "четверту", "п'яту"};
                 System.out.print("Введіть кількість стрічок: ");
                 int rows = sc.nextInt();
                 System.out.print("Введіть кількість стовпців: ");
