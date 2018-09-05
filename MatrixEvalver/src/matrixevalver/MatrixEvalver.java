@@ -6,8 +6,8 @@
 package matrixevalver;
 
 
+import java.io.IOException;
 import java.util.Scanner;
-
 /**
  *
  * @author FleX
@@ -15,14 +15,20 @@ import java.util.Scanner;
 public class MatrixEvalver {
 
     
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException, InterruptedException, InterruptedException {
         int[][] matrix1;
         int[][] matrix2;
-        System.out.println("\t###Программа для обрахунку дій над матрицями!###");
-        System.out.println("Перша матриця: ");
-        matrix1 = inputMatrix();
-        matrix2 = operation(matrix1);
-        outputMatrix(matrix2);
+        while(true){
+            System.out.println("\n\t###Программа для обрахунку дій над матрицями!###");
+            System.out.println("Перша матриця: ");
+            matrix1 = inputMatrix();
+            matrix2 = operation(matrix1);
+            if(matrix2 != null)outputMatrix(matrix2);
+            System.out.println("Продовжити роботу?(так-1, ні-0)");
+            Scanner sc = new Scanner(System.in);
+            final int n = sc.nextInt();
+            if(n == 0)break;
+        }
     }
     
     public static int[][] inputMatrix(){
@@ -67,6 +73,10 @@ public class MatrixEvalver {
                     }
                 }
             }
+            else{
+                System.err.println("Дані матриці додати не можна!");
+                return null;
+            }
             break;
             }
             case 2:{ 
@@ -77,6 +87,10 @@ public class MatrixEvalver {
                         }
                     }
                 }
+                else{
+                    System.err.println("Дані матриці відняти не можна!");
+                return null;
+                }
                 break;
             }
             case 3:{ 
@@ -86,6 +100,24 @@ public class MatrixEvalver {
                             matrix[i][j] = multiplyMatrix(i, j, matrix1, matrix2);
                         }
                     }
+                }
+                else{
+                    System.err.println("Дані матриці перемножити не можна!");
+                return null;
+                }
+                break;
+            }
+            case 4:{ 
+                if(colls1 == rows2){
+                    for (int i = 0; i < rows1; i++) {
+                        for (int j = 0; j < colls1; j++) {
+                            matrix[i][j] = multiplyMatrix(i, j, matrix1, matrix2);
+                        }
+                    }
+                }
+                else{
+                    System.err.println("Дану матрицю піднести до квадрату не можна!");
+                return null;
                 }
                 break;
             }
@@ -130,8 +162,6 @@ public class MatrixEvalver {
         System.out.println("5) Множення матриці на число");
         Scanner sc = new Scanner(System.in);
         int operator = sc.nextInt();
-        if(operator == 4) return evalMatrix(3, matrix1, matrix1);
-        
         if(operator == 5){
             System.out.print("Введіть число на яке множити: ");
             int k = sc.nextInt();
@@ -139,7 +169,7 @@ public class MatrixEvalver {
         } 
         System.out.println("Друга матриця:");
         int[][] matrix2 = inputMatrix();
-        return evalMatrix(operator, matrix1, matrix2);
+        return evalMatrix(operator, matrix1, (operator == 4) ? matrix1 : matrix2);
     }
 
     private static int[][] evalMatrix(int k, int[][] matrix1) {
