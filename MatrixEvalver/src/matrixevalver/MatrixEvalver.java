@@ -160,9 +160,19 @@ public class MatrixEvalver {
         System.out.println("3) Множення матриць");
         System.out.println("4) Піднесення матриці до квадрату");
         System.out.println("5) Множення матриці на число");
-        Scanner sc = new Scanner(System.in);
-        int operator = sc.nextInt();
+        
+        int operator;
+        while(true){
+        try{
+            Scanner sc = new Scanner(System.in);
+            operator = sc.nextInt();
+            break;
+        }catch(Exception e){
+            System.err.println("Ви ввели невірні дані! Введіть ще раз!");
+        }
+        }
         if(operator == 5){
+            Scanner sc = new Scanner(System.in);
             System.out.print("Введіть число на яке множити: ");
             int k = sc.nextInt();
             return evalMatrix(k, matrix1);
@@ -180,4 +190,5 @@ public class MatrixEvalver {
         }
         return matrix1;
     }
+
 }
